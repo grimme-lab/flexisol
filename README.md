@@ -1,7 +1,7 @@
 # Lightweight FlexiSol Analyzer
 [![License](https://img.shields.io/github/license/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/blob/main/LICENSE)
 [![Latest Version](https://img.shields.io/github/v/release/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/releases/latest)
-[![DOI](https://img.shields.io/badge/DOI-XX.XXX/XXX)](https://doi.org/XX.XXX/XXXX)
+[![DOI](https://img.shields.io/badge)](https://doi.org/XX.XXX/XXXX)
 
 <p align="center">
   <img src="toc.png" width="360">
