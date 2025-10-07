@@ -4,7 +4,7 @@
 [![DOI](https://img.shields.io/badge/doi_will_be-here-blue)](https://doi.org/XX.XXX/XXXX)
 
 <p align="center">
-  <img src="toc.png" width="360">
+  <img src="toc.png" width="420">
 </p>
 Lightweight evaluation tool for FlexiSol – a flexible solvation benchmark set with molecule ensembles. FlexiSol is the
 first of its kind to combine structurally and functionally complex, highly flexible solutes with exhaus-
