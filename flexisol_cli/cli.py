@@ -402,6 +402,10 @@ def build_parser() -> argparse.ArgumentParser:
     eo.add_argument("--verbose", action="store_true")
     eo.set_defaults(func=cmd_evaluate_one)
 
+    pc = sub.add_parser("config", help="Show resolved configuration")
+    pc.add_argument("--show", action="store_true", help="Print resolved configuration", default=True)
+    pc.set_defaults(func=cmd_config)
+
     return p
 
 
@@ -417,6 +421,30 @@ def _self_check(root: str, ref_gsolv: Optional[str], ref_pkab: Optional[str]) ->
         print("Self-check warnings:")
         for pmsg in problems:
             print(f" - {pmsg}")
+
+
+def cmd_config(args: argparse.Namespace) -> int:
+    """Print the resolved configuration (paths and options)."""
+    cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
+    data = cfg.to_dict()
+    print("\nResolved configuration:\n")
+    # Pretty print key: value lines in a stable order
+    order = [
+        'root', 'registry', 'ref_gsolv', 'ref_pkab', 'output_dir',
+        'weighting', 'geometry', 'sigma', 'abs_cutoff'
+    ]
+    for key in order:
+        print(f"  {key.ljust(14)}: {data.get(key)}")
+    # Registry size hint
+    reg = data.get('registry_map') or {}
+    if isinstance(reg, dict) and reg:
+        n_el = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'el')
+        n_solv = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'solv')
+        print(f"  registry_map  : {len(reg)} entries ({n_el} el, {n_solv} solv)")
+    else:
+        print("  registry_map  : (not loaded)")
+    print()
+    return 0
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -436,4 +464,3 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

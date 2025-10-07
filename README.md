@@ -34,7 +34,7 @@ repo/
 
 ## Install
 - Create a fresh Conda env (recommended):
-  - `conda create -n flexisol python=3.10 -y`
+  - `conda create -n flexisol python=3.12 -y`
   - `conda activate flexisol`
 - Install from the repo root:
   - Editable (dev): `pip install -e .`
@@ -56,6 +56,10 @@ There are two main commands: `evaluate-all` and `evaluate-one` for analyzing mul
   - `flexisol evaluate-all -h`
   - `flexisol evaluate-one -h`
   - `flexisol populate -h` 
+
+### Inspect configuration
+- Show resolved paths and options (root, references, output, weighting, geometry):
+  - `flexisol config --show`
 
 ### Prepare data
 - Populate from CSV (writes el_energy/solv_energy):
