@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Local outputs
+out/
+output/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Energy files
+el_energy
+solv_energy
+
+# VSCode
+.vscode/
+
+# egg
+*.egg-info/
