@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=63", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flexisol-cli"
+version = "0.1.0"
+description = "Lightweight, no-compute evaluator for FlexiSol benchmarks"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Proprietary"}
+authors = [
+  { name = "L. Wittmann" },
+  { name = "C. E. Selzer" }
+]
+dependencies = [
+  "numpy",
+  "pandas",
+]
+
+[project.scripts]
+flexisol = "flexisol_eval.cli:main"
+
+[tool.setuptools]
+packages = ["flexisol_eval"]
+
+[tool.setuptools.package-data]
+flexisol_eval = ["registry.json"]
