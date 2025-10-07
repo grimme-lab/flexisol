@@ -27,7 +27,7 @@ def _print_header():
     mid2 = '   | ' + subtitle.center(inner_w) + ' |'
     mid3 = '   | ' + authors_line.center(inner_w) + ' |'
     bot = '   +' + '-' * (inner_w + 2) + '+'
-    print(); print(top) ; print(mid1) ; print(mid2) ; print(mid3) ; print(bot)
+    print() ; print(top) ; print(mid1) ; print(mid2) ; print(mid3) ; print(bot) ; print()
 
 
 BUILTIN_METHOD_REGISTRY: Dict[str, Dict[str, str]] = {
@@ -86,17 +86,31 @@ def _load_registry(path: Optional[str]) -> None:
 
 
 def _normalize_path(p: str, root: Optional[str]) -> str:
-    """Normalize a structure path with respect to a root directory."""
-    if root:
-        if os.path.isabs(p):
-            idx = p.find("flexisol/")
-            if idx != -1:
-                p = os.path.join(root, p[idx + len("flexisol/"):])
-                p = os.path.normpath(p)
-        else:
-            if p.startswith("flexisol/"):
-                p = os.path.join(root, p[len("flexisol/"):])
-            p = os.path.join(root, p)
+    """Normalize a structure path with respect to a benchmark root directory.
+
+    Heuristics:
+    - If `p` is relative: join to `root` if provided.
+    - If `p` is absolute and contains "flexisol/": rebase the portion after that onto `root`.
+    - If `p` is absolute, does not exist, and `root` is provided: try rebase by last three parts
+      (structuremode/solvent/structure) under `root`.
+    - Otherwise, return normalized `p`.
+    """
+    if not root:
+        return os.path.normpath(p)
+    if not os.path.isabs(p):
+        if p.startswith("flexisol/"):
+            return os.path.normpath(os.path.join(root, p[len("flexisol/"):]))
+        return os.path.normpath(os.path.join(root, p))
+    # Absolute path
+    idx = p.find("flexisol/")
+    if idx != -1:
+        return os.path.normpath(os.path.join(root, p[idx + len("flexisol/") :]))
+    if not os.path.isdir(p):
+        # Try last 3 parts under root
+        parts = p.strip(os.sep).split(os.sep)
+        if len(parts) >= 3:
+            candidate = os.path.join(root, *parts[-3:])
+            return os.path.normpath(candidate)
     return os.path.normpath(p)
 
 
@@ -114,7 +128,11 @@ def _write_energy(path: str, energy: str, etype: Literal["el", "solv"], dry_run:
 def cmd_populate(args: argparse.Namespace) -> int:
     """Create per-method energy files under each structure directory."""
     cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
-    df = pd.read_csv(args.csv)
+    csv_path = getattr(args, 'csv', None) or cfg.energies_csv
+    if not csv_path or not os.path.isfile(csv_path):
+        print(f"Error: energies CSV not found. Pass --csv or set FLEXISOL_ENERGIES_CSV (got: {csv_path})")
+        return 2
+    df = pd.read_csv(csv_path)
 
     csv_cols: Dict[str, Optional[str]] = {}
     missing_cols: List[str] = []
@@ -134,7 +152,7 @@ def cmd_populate(args: argparse.Namespace) -> int:
     per_method_written: Dict[str, int] = {meta["method"]: 0 for meta in registry.values()}
 
     start = time.time()
-    print(f"populating {cfg.root} ...", end='', flush=True)
+    print(f"populating {cfg.root} from {csv_path} ...", end='', flush=True)
 
     for _, row in df.iterrows():
         base_path = _normalize_path(str(row["path"]), cfg.root)
@@ -162,8 +180,9 @@ def cmd_populate(args: argparse.Namespace) -> int:
 
     dur = time.time() - start
     print(f" done ({dur:.2f} sec)")
+    # Always print a short summary
+    print(f"populate summary: wrote {n_written} energies, skipped {n_skipped} structures")
     if args.verbose:
-        print(f"populate: wrote {n_written} energies, skipped {n_skipped} structures")
         print("method coverage (files written):")
         for m, cnt in sorted(per_method_written.items()):
             print(f"  {m.ljust(28)} {cnt}")
@@ -361,7 +380,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     pp = sub.add_parser("populate", help="Populate method folders with energy files from CSV")
     pp.add_argument("--csv", default="data/raw_energies/energies.csv", help="Input CSV with energies")
-    pp.add_argument("--root", default=None, help="Root dir containing structure folders")
+    pp.add_argument("--root", "--benchmark-root", "--dataset-root", dest="root", default=None,
+                    help="Benchmark root directory (contains structure folders)")
     pp.add_argument("--registry", default=None, help="Path to registry.json (methods + aliases)")
     pp.add_argument("--dry-run", action="store_true", help="Do not write files")
     pp.add_argument("--verbose", action="store_true")
@@ -371,7 +391,8 @@ def build_parser() -> argparse.ArgumentParser:
     pp.set_defaults(func=cmd_populate)
 
     ea = sub.add_parser("evaluate-all", help="Evaluate all registry methods for a given weighting/geometry")
-    ea.add_argument("--root", default=None, help="Root dir containing structure folders")
+    ea.add_argument("--root", "--benchmark-root", "--dataset-root", dest="root", default=None,
+                    help="Benchmark root directory (contains structure folders)")
     ea.add_argument("--registry", default=None, help="Path to registry.json (methods + aliases)")
     ea.add_argument("-w", "--weighting", default="boltzmann", choices=["boltzmann", "minimum"], help="Weighting scheme")
     ea.add_argument("-g", "--geometry", default="full", choices=["full", "gas", "solv"], help="Geometry selection")
@@ -385,7 +406,8 @@ def build_parser() -> argparse.ArgumentParser:
     ea.set_defaults(func=cmd_evaluate_all)
 
     eo = sub.add_parser("evaluate-one", help="Evaluate a specific (electronic,solvation) pair")
-    eo.add_argument("--root", default=None, help="Root dir containing structure folders")
+    eo.add_argument("--root", "--benchmark-root", "--dataset-root", dest="root", default=None,
+                    help="Benchmark root directory (contains structure folders)")
     eo.add_argument("--registry", default=None, help="Path to registry.json (methods + aliases)")
     eo.add_argument("-ee", "--electronic-energy", required=True, help="Electronic method (registry key or folder name)")
     eo.add_argument("-se", "--solvation-energy", required=True, help="Solvation method (registry key or folder name)")
@@ -427,14 +449,26 @@ def cmd_config(args: argparse.Namespace) -> int:
     """Print the resolved configuration (paths and options)."""
     cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
     data = cfg.to_dict()
-    print("\nResolved configuration:\n")
+    print("Resolved default configuration:\n")
     # Pretty print key: value lines in a stable order
     order = [
-        'root', 'registry', 'ref_gsolv', 'ref_pkab', 'output_dir',
-        'weighting', 'geometry', 'sigma', 'abs_cutoff'
+        'root', 'registry', 'ref_gsolv', 'ref_pkab', 'energies_csv', 'output_dir',
+        # 'weighting', 'geometry', 'sigma', 'abs_cutoff'
     ]
+    file_keys = {'registry', 'ref_gsolv', 'ref_pkab', 'energies_csv'}
+    dir_keys = {'root', 'output_dir'}
     for key in order:
-        print(f"  {key.ljust(14)}: {data.get(key)}")
+        val = data.get(key)
+        status = ''
+        if isinstance(val, str):
+            try:
+                if key in file_keys:
+                    status = ' (ok)' if os.path.isfile(val) else ' (missing)'
+                elif key in dir_keys:
+                    status = ' (ok)' if os.path.isdir(val) else ' (missing)'
+            except Exception:
+                status = ''
+        print(f"  {key.ljust(14)}: {val}{status}")
     # Registry size hint
     reg = data.get('registry_map') or {}
     if isinstance(reg, dict) and reg:
