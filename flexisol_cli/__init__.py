@@ -37,3 +37,4 @@ if not _authors:
 __authors__: Final[List[str]] = _authors
 
 __all__ = ["__version__", "__authors__"]
+

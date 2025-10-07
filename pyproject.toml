@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Lightweight, no-compute evaluator for FlexiSol benchmarks"
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "Proprietary"}
+license = {file = "LICENSE.txt"}
 authors = [
   { name = "L. Wittmann" },
   { name = "C. E. Selzer" }
@@ -19,10 +19,11 @@ dependencies = [
 ]
 
 [project.scripts]
-flexisol = "flexisol_eval.cli:main"
+flexisol = "flexisol_cli.cli:main"
+flexisol-cli = "flexisol_cli.cli:main"
 
 [tool.setuptools]
-packages = ["flexisol_eval"]
+packages = ["flexisol_cli"]
 
 [tool.setuptools.package-data]
-flexisol_eval = ["registry.json"]
+flexisol_cli = ["registry.json"]

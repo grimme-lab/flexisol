@@ -17,15 +17,7 @@ kB = 0.0083144621         # kJ/(mol*K)
 
 
 def boltzmann_weight(energies, temperature=298.15):
-    """Return Boltzmann-weighted energy from a 1D list/array.
-
-    Args:
-        energies (array-like): Energies (Hartree). NaNs are ignored.
-        temperature (float): Temperature in Kelvin. Default 298.15 K.
-
-    Returns:
-        float: Weighted average energy (Hartree). NaN if no valid values.
-    """
+    """Return Boltzmann-weighted energy from a 1D list/array."""
     energies = np.array(energies, dtype=float)
     energies = energies[~np.isnan(energies)]
     if energies.size == 0:
@@ -50,12 +42,7 @@ def min_weight(energies):
 
 
 def get_structures(benchmarkdir, molbar=False):
-    """Discover structure directories under a benchmark root.
-
-    Traverses `<benchmarkdir>/<structuremode>/<solvent>/<structure>` and builds a
-    DataFrame with parsed metadata from directory names (name, charge, tautomer,
-    conformer).
-    """
+    """Discover structure directories under a benchmark root."""
     structures = []
     for structuremode in os.listdir(benchmarkdir):
         sm_path = os.path.join(benchmarkdir, structuremode)
@@ -129,13 +116,7 @@ def get_energy(args):
 
 
 def get_energies(df, methods, processes=None):
-    """Read energies for all structures and methods using a thread pool.
-
-    Args:
-        df: Structure DataFrame.
-        methods: Method folder names to read.
-        processes: Interpreted as max_workers for threads (I/O-bound).
-    """
+    """Read energies for all structures and methods using a thread pool."""
     tasks = [(index, row, methods) for index, row in df.iterrows()]
     with ThreadPoolExecutor(max_workers=processes) as ex:
         results = list(ex.map(get_energy, tasks))
@@ -159,3 +140,4 @@ def get_minimum(df, methods):
     group_keys = ['name', 'benchmark', 'structuremode', 'solvent', 'charge']
     weighted_energies = df.groupby(group_keys)[methods].agg(lambda x: min_weight(x))
     return weighted_energies.reset_index()
+

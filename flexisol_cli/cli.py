@@ -8,7 +8,6 @@ from typing import Dict, List, Literal, Optional, Tuple
 import pandas as pd
 import numpy as np
 
-# Local imports
 from .reader import get_structures, get_energies, get_boltzmann, get_minimum
 from .evaluation import read_ref, eval_gsolv, eval_pkab
 from .metrics import print_stats
@@ -437,3 +436,4 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+

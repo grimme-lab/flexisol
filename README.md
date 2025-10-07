@@ -1,4 +1,4 @@
-# Lightweight FlexiSol Analyzer
+# FlexiSol-CLI: FlexiSol Analyzer
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/grimme-lab/flexisol/blob/main/LICENSE.txt)
 [![Latest Version](https://img.shields.io/github/v/release/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/releases/latest)
 [![DOI](https://img.shields.io/badge/doi_will_be-here-blue)](https://doi.org/XX.XXX/XXXX)
@@ -6,9 +6,7 @@
 <p align="center">
   <img src="toc.png" width="420">
 </p>
-Lightweight evaluation tool for FlexiSol – a flexible solvation benchmark set with molecule ensembles. FlexiSol is the
-first of its kind to combine structurally and functionally complex, highly flexible solutes with exhaus-
-tive conformational sampling for systematic testing of solvation models.
+Easy evaluation tool for FlexiSol - which is a flexible solvation benchmark set with molecule ensembles. FlexiSol is the first of its kind to combine structurally and functionally complex, highly flexible solutes with exhaustive conformational sampling for systematic testing of solvation models.
 
 ## Project Structure
 
@@ -18,9 +16,9 @@ repo/
 ├─ data/
 │  ├─ raw_energies/        # CSV with energies for `populate`
 │  ├─ references/          # Experimental references (CSV)
-│  └─ results/             # Published example results (small)
+│  └─ results/             # Published raw results (CSV)
 ├─ output/                 # Generated CSVs from evaluations
-├─ flexisol_eval/          # Package: CLI and helpers
+├─ flexisol_cli/           # Package: CLI and helpers
 │  ├─ cli.py               # Console entrypoint (`flexisol`)
 │  ├─ reader.py            # I/O + weighting (Boltzmann/minimum)
 │  ├─ evaluation.py        # gsolv/pkab assembly vs references
@@ -42,10 +40,11 @@ repo/
   - Editable (dev): `pip install -e .`
   - Regular: `pip install .`
 - Verify installation:
-  - `flexisol --help`  (or `python -m flexisol_eval.cli --help`)
+  - `flexisol --help` or `flexisol-cli --help`
+  - Alternatively: `python -m flexisol_cli.cli --help`
 
 ## Usage
-General syntax is: `flexisol <command> [options]` (e.g., `flexisol evaluate-all -h`).
+General syntax is: `flexisol <command> [options]` or `flexisol-cli <command> [options]` (e.g., `flexisol evaluate-all -h`).
 
 There are two main commands: `evaluate-all` and `evaluate-one` for analyzing multiple or single methods. The `populate` command copies energies from a CSV into the expected folder structure.
 
@@ -125,7 +124,7 @@ Working on el_r2scan-3c [weighting=boltzmann, geometry=full]
 - Always writes a CSV to `output/<ee>-<geometry>-<weighting>-<se>-results.csv` and prints per-datapoint stats (gsolv, pkab) with N.
 
 ### Adding a new method
-- Edit `flexisol_eval/registry.json` (no code changes needed)
+- Edit `flexisol_cli/registry.json` (no code changes needed)
 - Compute your new method (electronic energy or solvation energy) for all structures.
   - Include the energies either in the `flexisol/` folder directly (`el_energy` or `solv_energy`), or
   - Place them in `data/raw_energies/energies.csv` and run `flexisol populate` to copy them over.
