@@ -1,6 +1,22 @@
+<table>
+<tr>
+<td style="vertical-align: middle;">
+
 # Lightweight FlexiSol Analyzer
 
+[![License](https://img.shields.io/github/license/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/blob/main/LICENSE)
+[![Latest Version](https://img.shields.io/github/v/release/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/releases/latest)
+[![DOI](https://img.shields.io/badge/DOI-XX.XXX/XXX)](https://doi.org/XX.XXX/XXXX)
+
 Minimal evaluation tool for FlexiSol results with clear, reproducible CLI.
+
+</td>
+<td style="vertical-align: middle; padding-left: 20px;">
+  <img src="toc.png" width="360"/>
+  <p style="text-align:center; font-style: italic; margin-top:8px;"></p>
+</td>
+</tr>
+</table>
 
 ## Project Structure
 
