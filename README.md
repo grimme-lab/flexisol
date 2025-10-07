@@ -44,30 +44,37 @@ repo/
   - Alternatively: `python -m flexisol_cli.cli --help`
 
 ## Usage
-General syntax is: `flexisol <command> [options]` or `flexisol-cli <command> [options]` (e.g., `flexisol evaluate-all -h`).
+General syntax is: `flexisol <command> [options]` or `flexisol-cli <command> [options]` (e.g., `flexisol all -h`).
 
-There are two main commands: `evaluate-all` and `evaluate-one` for analyzing multiple or single methods. The `populate` command copies energies from a CSV into the expected folder structure.
+There are two main commands: `evaluate-all` (alias: `all`) and `evaluate-one` (alias: `one`) for analyzing multiple or single methods. The `populate` command copies energies from a CSV into the expected folder structure.
 
 ### Quickstart
 - Populate and evaluate all methods using the provided data folders:
-  - `flexisol populate --csv data/raw_energies/energies.csv --root flexisol`
-  - `flexisol evaluate-all --root flexisol -w boltzmann -g full`
+  - `flexisol populate --csv data/raw_energies/energies.csv --benchmark-root flexisol`
+  - `flexisol all --benchmark-root flexisol -w boltzmann -g full`
 - Find mode-specific help with `-h` on any command, e.g.:
-  - `flexisol evaluate-all -h`
-  - `flexisol evaluate-one -h`
+  - `flexisol all -h`
+  - `flexisol one -h`
   - `flexisol populate -h` 
 
 ### Inspect configuration
 - Show resolved paths and options (root, references, output, weighting, geometry):
   - `flexisol config --show`
 
+### Benchmark root path
+- The CLI needs the path to the benchmark dataset (the directory containing structure subfolders). This is called the "benchmark root".
+- Set it explicitly with any of these equivalent flags: `--benchmark-root`, `--dataset-root`, or `--root`.
+  - Example: `flexisol evaluate-all --benchmark-root /path/to/flexisol`
+- Alternatively, set the environment variable `FLEXISOL_ROOT`.
+- Defaults: if omitted, the tool looks for `./flexisol` (relative to your current working directory). If not found, it uses the current working directory.
+
 ### Prepare data
 - Populate from CSV (writes el_energy/solv_energy):
-  - `flexisol populate --csv data/raw_energies/energies.csv --root flexisol`
+  - `flexisol populate --csv data/raw_energies/energies.csv --benchmark-root flexisol`
 
 ### Batch analysis
 - Evaluate all baselines (writes CSVs to `output/`, prints stats):
-  - `flexisol evaluate-all --root flexisol -w boltzmann -g full`
+  - `flexisol all --benchmark-root flexisol -w boltzmann -g full`
 - Options for stats filtering (legacy-like):
   - `--sigma 3` (default), `--no-sigma`, `--abs-cutoff 200` (default), `--no-abs-cutoff`.
 
@@ -81,11 +88,11 @@ There are two main commands: `evaluate-all` and `evaluate-one` for analyzing mul
   - `solv`: Use solvated geometry for both modes (duplicates solv rows to gas).
 
 Examples:
-- Minimum weighting with solv geometry: `flexisol evaluate-all --root flexisol -w minimum -g solv`
-- Gas geometry only: `flexisol evaluate-one --root flexisol -ee el_r2scan-3c -se smd -g gas`
+- Minimum weighting with solv geometry: `flexisol all --benchmark-root flexisol -w minimum -g solv`
+- Gas geometry only: `flexisol one --benchmark-root flexisol -ee el_r2scan-3c -se smd -g gas`
 
 ### Sample Output
-Below is a sample run of `flexisol evaluate-all` with Boltzmann weighting and full geometry. It shows the header (tool, version, authors), progress steps with timings, result path and row counts, and per-datapoint statistics.
+Below is a sample run of `flexisol all` with Boltzmann weighting and full geometry. It shows the header (tool, version, authors), progress steps with timings, result path and row counts, and per-datapoint statistics.
 
 ```
    +------------------------------------+

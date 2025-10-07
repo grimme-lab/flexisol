@@ -330,7 +330,7 @@ def cmd_evaluate_one(args: argparse.Namespace) -> int:
     if not se:
         print(f"Unknown solvation method: {args.solvation_energy}")
         return 2
-    print(f"\nWorking on {ee} + {se}  [weighting={cfg.weighting}, geometry={cfg.geometry}]")
+    print(f"Working on {ee} + {se}  [weighting={cfg.weighting}, geometry={cfg.geometry}]")
     _, results = _evaluate(cfg.root, ee, [se], cfg.weighting, cfg.geometry, cfg.ref_gsolv, cfg.ref_pkab)
     n = len(results)
     out_path = args.csv
@@ -361,7 +361,7 @@ def cmd_evaluate_all(args: argparse.Namespace) -> int:
 
     for ee in ee_methods:
         t0 = time.time()
-        print(f"\nWorking on {ee} [weighting={cfg.weighting}, geometry={cfg.geometry}]")
+        print(f"Working on {ee} [weighting={cfg.weighting}, geometry={cfg.geometry}]")
         _, results = _evaluate(cfg.root, ee, solv_methods, cfg.weighting, cfg.geometry, cfg.ref_gsolv, cfg.ref_pkab)
         out = os.path.join(out_dir, f"{ee}-{cfg.geometry}-{cfg.weighting}-results.csv")
         results.to_csv(out, index=False, float_format='%.2f')
@@ -371,6 +371,7 @@ def cmd_evaluate_all(args: argparse.Namespace) -> int:
         parts_str = ", ".join(parts) if parts else str(len(results))
         print(f"  results: {len(results)} rows ({parts_str})  (total {time.time()-t0:.2f} sec)")
         print_stats(results, solv_methods, sigma=cfg.sigma, abs_cutoff=cfg.abs_cutoff)
+        print()
     return 0
 
 
@@ -390,7 +391,7 @@ def build_parser() -> argparse.ArgumentParser:
     pp.add_argument("--allow-missing", action="store_true", help="Allow missing CSV columns")
     pp.set_defaults(func=cmd_populate)
 
-    ea = sub.add_parser("evaluate-all", help="Evaluate all registry methods for a given weighting/geometry")
+    ea = sub.add_parser("evaluate-all", aliases=["all"], help="Evaluate all registry methods for a given weighting/geometry")
     ea.add_argument("--root", "--benchmark-root", "--dataset-root", dest="root", default=None,
                     help="Benchmark root directory (contains structure folders)")
     ea.add_argument("--registry", default=None, help="Path to registry.json (methods + aliases)")
@@ -405,7 +406,7 @@ def build_parser() -> argparse.ArgumentParser:
     ea.add_argument("--verbose", action="store_true")
     ea.set_defaults(func=cmd_evaluate_all)
 
-    eo = sub.add_parser("evaluate-one", help="Evaluate a specific (electronic,solvation) pair")
+    eo = sub.add_parser("evaluate-one", aliases=["one"], help="Evaluate a specific (electronic,solvation) pair")
     eo.add_argument("--root", "--benchmark-root", "--dataset-root", dest="root", default=None,
                     help="Benchmark root directory (contains structure folders)")
     eo.add_argument("--registry", default=None, help="Path to registry.json (methods + aliases)")
