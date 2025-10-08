@@ -201,7 +201,7 @@ def cmd_populate(args: argparse.Namespace) -> int:
 
     status_done(t0)
     # Always print a short summary
-    print(f"Summary ... wrote {n_written} energies, skipped {n_skipped} structures")
+    print_kv("summary", f"wrote {n_written} energies, skipped {n_skipped} structures")
     if args.verbose:
         print("Method coverage ... (files written)")
         for m, cnt in sorted(per_method_written.items()):
@@ -465,11 +465,11 @@ def cmd_config(args: argparse.Namespace) -> int:
     """Print the resolved configuration (paths and options)."""
     cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
     data = cfg.to_dict()
-    print("Resolved configuration")
+    print("Resolved configuration ...")
     # Pretty print key: value lines in a stable order
     order = [
         'root', 'registry', 'ref_gsolv', 'ref_pkab', 'energies_csv', 'output_dir',
-        # 'weighting', 'geometry', 'sigma', 'abs_cutoff'
+        'weighting', 'geometry', 'sigma', 'abs_cutoff'
     ]
     file_keys = {'registry', 'ref_gsolv', 'ref_pkab', 'energies_csv'}
     dir_keys = {'root', 'output_dir'}
@@ -490,9 +490,9 @@ def cmd_config(args: argparse.Namespace) -> int:
     if isinstance(reg, dict) and reg:
         n_el = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'el')
         n_solv = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'solv')
-        print(f"  registry_map   ... {len(reg)} entries ({n_el} el, {n_solv} solv)")
+        print(f"  registry_map  ... {len(reg)} entries ({n_el} el, {n_solv} solv)")
     else:
-        print("  registry_map   ... (not loaded)")
+        print("  registry_map  ... (not loaded)")
     print()
     return 0
 
