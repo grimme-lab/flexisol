@@ -30,6 +30,25 @@ def _print_header():
     print() ; print(top) ; print(mid1) ; print(mid2) ; print(mid3) ; print(bot) ; print()
 
 
+def status_start(label: str, width: int = 25) -> float:
+    """Start a timed status line with unified delimiter and return t0."""
+    t0 = time.time()
+    print(f"  {label.ljust(width)} ... ", end='', flush=True)
+    return t0
+
+
+def status_done(t0: float) -> None:
+    """Finish a timed status line started with status_start."""
+    print(f"done ({time.time()-t0:.2f} sec)")
+
+
+def print_kv(key: str, value: object, indent: int = 2, key_width: int = 25) -> None:
+    """Unified key/value printer with ' ... ' delimiter."""
+    pad = ' ' * indent
+    sval = '' if value is None else str(value)
+    print(f"{pad}{key.ljust(key_width)} ... {sval}")
+
+
 BUILTIN_METHOD_REGISTRY: Dict[str, Dict[str, str]] = {
     # Electronic methods
     "el_gfn2": {"method": "el_gfn2", "type": "el"},
@@ -130,7 +149,7 @@ def cmd_populate(args: argparse.Namespace) -> int:
     cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
     csv_path = getattr(args, 'csv', None) or cfg.energies_csv
     if not csv_path or not os.path.isfile(csv_path):
-        print(f"Error: energies CSV not found. Pass --csv or set FLEXISOL_ENERGIES_CSV (got: {csv_path})")
+        print(f"Error ... energies CSV not found (got: {csv_path}). Pass --csv or set FLEXISOL_ENERGIES_CSV")
         return 2
     df = pd.read_csv(csv_path)
 
@@ -151,18 +170,20 @@ def cmd_populate(args: argparse.Namespace) -> int:
     n_skipped = 0
     per_method_written: Dict[str, int] = {meta["method"]: 0 for meta in registry.values()}
 
-    start = time.time()
-    print(f"populating {cfg.root} from {csv_path} ...", end='', flush=True)
+    print(f"Populating FlexiSol")
+    print_kv("directory", cfg.root)
+    print_kv("energies", csv_path)
+    t0 = status_start("writing files")
 
     for _, row in df.iterrows():
         base_path = _normalize_path(str(row["path"]), cfg.root)
         if not os.path.isdir(base_path):
             if args.strict:
-                print(f"Missing structure dir (strict): {base_path}")
+                print(f"Missing structure dir (strict) ... {base_path}")
                 return 3
             else:
                 if args.verbose:
-                    print(f"Skip: no dir {base_path}")
+                    print(f"Skip ... no dir {base_path}")
                 n_skipped += 1
                 continue
 
@@ -178,12 +199,11 @@ def cmd_populate(args: argparse.Namespace) -> int:
             n_written += 1
             per_method_written[meta["method"]] = per_method_written.get(meta["method"], 0) + 1
 
-    dur = time.time() - start
-    print(f" done ({dur:.2f} sec)")
+    status_done(t0)
     # Always print a short summary
-    print(f"populate summary: wrote {n_written} energies, skipped {n_skipped} structures")
+    print(f"Summary ... wrote {n_written} energies, skipped {n_skipped} structures")
     if args.verbose:
-        print("method coverage (files written):")
+        print("Method coverage ... (files written)")
         for m, cnt in sorted(per_method_written.items()):
             print(f"  {m.ljust(28)} {cnt}")
     return 0
@@ -254,16 +274,14 @@ def _evaluate(root: str,
 
     def _status_done(t0: float):
         print(f"done ({time.time()-t0:.2f} sec)")
-    t0 = time.time()
-    _status_start("reading structures")
+    t0 = status_start("reading structures")
     structures = get_structures(root, molbar=False)
-    _status_done(t0)
+    status_done(t0)
 
-    t1 = time.time()
-    _status_start("reading energies")
+    t1 = status_start("reading energies")
     methods_all = [ee_method] + solv_methods
     energies = get_energies(structures, methods_all)
-    _status_done(t1)
+    status_done(t1)
 
     workenergies = energies.copy()
     grp_keys = ['name', 'benchmark', 'solvent', 'charge']
@@ -287,8 +305,7 @@ def _evaluate(root: str,
         if m in workenergies.columns:
             workenergies[m] = workenergies[m] + base_filled
 
-    t2 = time.time()
-    _status_start(f"weighting ({weighting})")
+    t2 = status_start(f"weighting ({weighting})")
     weighted_E = _pick_weight(workenergies, methods_all, weighting)
     weighted_E['name'] = (
         weighted_E['name']
@@ -299,23 +316,21 @@ def _evaluate(root: str,
     weighted_E['solvent'] = weighted_E['solvent'].str.lower()
     weighted_E = _apply_geometry(weighted_E, geometry)
     weighted_E = _attach_solventmode(weighted_E, ee_method)
-    _status_done(t2)
+    status_done(t2)
 
     results = pd.DataFrame()
     if ref_gsolv and os.path.exists(ref_gsolv):
-        t3 = time.time()
-        _status_start("evaluating gsolv")
+        t3 = status_start("evaluating gsolv")
         gsolv_ref = read_ref(ref_gsolv)
         res = eval_gsolv(weighted_E, gsolv_ref, solv_methods, gas_method=ee_method)
         results = pd.concat([results, res]) if not res.empty else results
-        _status_done(t3)
+        status_done(t3)
     if ref_pkab and os.path.exists(ref_pkab):
-        t4 = time.time()
-        _status_start("evaluating pkab")
+        t4 = status_start("evaluating pkab")
         pkab_ref = read_ref(ref_pkab)
         res = eval_pkab(weighted_E, pkab_ref, solv_methods)
         results = pd.concat([results, res]) if not res.empty else results
-        _status_done(t4)
+        status_done(t4)
 
     return weighted_E, results
 
@@ -340,7 +355,7 @@ def cmd_evaluate_one(args: argparse.Namespace) -> int:
         out_fname = f"{ee}-{cfg.geometry}-{cfg.weighting}-{se}-results.csv"
         out_path = os.path.join(out_dir, out_fname)
     os.makedirs(os.path.dirname(out_path) or '.', exist_ok=True)
-    results.to_csv(out_path, index=False, float_format='%.2f')
+    results.to_csv(out_path, index=False, float_format='%.1f')
     by_dp = results['datapoint'].value_counts(dropna=False).to_dict() if 'datapoint' in results.columns else {}
     parts = [f"{k}={v}" for k, v in sorted(by_dp.items())]
     parts_str = ", ".join(parts) if parts else str(n)
@@ -364,7 +379,7 @@ def cmd_evaluate_all(args: argparse.Namespace) -> int:
         print(f"Working on {ee} [weighting={cfg.weighting}, geometry={cfg.geometry}]")
         _, results = _evaluate(cfg.root, ee, solv_methods, cfg.weighting, cfg.geometry, cfg.ref_gsolv, cfg.ref_pkab)
         out = os.path.join(out_dir, f"{ee}-{cfg.geometry}-{cfg.weighting}-results.csv")
-        results.to_csv(out, index=False, float_format='%.2f')
+        results.to_csv(out, index=False, float_format='%.1f')
         print(f"  results written to {out}")
         by_dp = results['datapoint'].value_counts(dropna=False).to_dict() if 'datapoint' in results.columns else {}
         parts = [f"{k}={v}" for k, v in sorted(by_dp.items())]
@@ -450,7 +465,7 @@ def cmd_config(args: argparse.Namespace) -> int:
     """Print the resolved configuration (paths and options)."""
     cfg = getattr(args, 'cfg', None) or FlexisolConfig.from_args(args)
     data = cfg.to_dict()
-    print("Resolved default configuration:\n")
+    print("Resolved configuration")
     # Pretty print key: value lines in a stable order
     order = [
         'root', 'registry', 'ref_gsolv', 'ref_pkab', 'energies_csv', 'output_dir',
@@ -469,15 +484,15 @@ def cmd_config(args: argparse.Namespace) -> int:
                     status = ' (ok)' if os.path.isdir(val) else ' (missing)'
             except Exception:
                 status = ''
-        print(f"  {key.ljust(14)}: {val}{status}")
+        print(f"  {key.ljust(14)} ... {val}{status}")
     # Registry size hint
     reg = data.get('registry_map') or {}
     if isinstance(reg, dict) and reg:
         n_el = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'el')
         n_solv = sum(1 for v in reg.values() if isinstance(v, dict) and v.get('type') == 'solv')
-        print(f"  registry_map  : {len(reg)} entries ({n_el} el, {n_solv} solv)")
+        print(f"  registry_map   ... {len(reg)} entries ({n_el} el, {n_solv} solv)")
     else:
-        print("  registry_map  : (not loaded)")
+        print("  registry_map   ... (not loaded)")
     print()
     return 0
 

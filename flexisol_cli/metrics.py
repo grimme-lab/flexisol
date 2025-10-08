@@ -95,7 +95,7 @@ def print_stats(results: pd.DataFrame,
                 continue
             stats = get_average_errors(sub[col])
             def r(x):
-                return 'nan' if (x is None or (isinstance(x, float) and np.isnan(x))) else f"{x:.2f}"
+                return 'nan' if (x is None or (isinstance(x, float) and np.isnan(x))) else f"{x:.1f}"
             label = m[:24].ljust(24)
             print(f"    {label} {r(stats['me']):>8} {r(stats['mae']):>8} {r(stats['rmse']):>8} {r(stats['sd']):>8} {r(stats['amax']):>8} {stats['n']:>6}")
 
