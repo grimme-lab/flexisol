@@ -1,7 +1,7 @@
 # flexisol-cli: FlexiSol Analyzer
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/grimme-lab/flexisol/blob/main/LICENSE.txt)
 [![Latest Version](https://img.shields.io/github/v/release/grimme-lab/flexisol)](https://github.com/grimme-lab/flexisol/releases/latest)
-[![DOI](https://img.shields.io/badge/doi_will_be-here-blue)](https://doi.org/XX.XXX/XXXX)
+[![DOI](https://img.shields.io/badge/DOI-10.1039/D5SC06406F-blue)](https://doi.org/10.1039/D5SC06406F)
 
 <p align="center">
   <img src="toc.png" width="420">
