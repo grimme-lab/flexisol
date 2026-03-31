@@ -487,30 +487,30 @@ sulfathiazole,"4-amino-N-(1,3-thiazol-2-yl)benzenesulfonamide",water,C1=CC(=CC=C
 temazepam,"(RS)-7-Chloro-1,3-dihydro-3-hydroxy-1-methyl-5-phenyl-1,4-benzodiazepin-2-one",ethanol,CN1C2=C(C(C3=CC=CC=C3)=NC(O)C1=O)C=C(Cl)C=C2,-18.62,10.1016/j.cej.2021.129307
 trochol,"3a-(hydroxymethyl)-5a,5b,8,8,11a-pentamethyl-1-prop-1-en-2-yl-1,2,3,4,5,6,7,7a,9,10,11,11b,12,13,13a,13b-hexadecahydrocyclopenta[a]chrysen-9-ol",ethanol,CC(=C)C1CCC2(C1C3CCC4C5(CCC(C(C5CCC4(C3(CC2)C)C)(C)C)O)C)CO,-27.66,10.1016/j.cej.2021.129307
 trochol,"3a-(hydroxymethyl)-5a,5b,8,8,11a-pentamethyl-1-prop-1-en-2-yl-1,2,3,4,5,6,7,7a,9,10,11,11b,12,13,13a,13b-hexadecahydrocyclopenta[a]chrysen-9-ol",methanol,CC(=C)C1CCC2(C1C3CCC4C5(CCC(C(C5CCC4(C3(CC2)C)C)(C)C)O)C)CO,-27.28,10.1016/j.cej.2021.129307
-alachlor,"2-chloro-N-(2,6-diethylphenyl)-N-(methoxymethyl)acetamide",hexadecane,CCC1=C(C(=CC=C1)CC)N(COC)C(=O)CCl,-13,10.1016/j.fluid.2010.09.043
-bifenox,"methyl 5-(2,4-dichlorophenoxy)-2-nitrobenzoate",hexadecane,COC(=O)C1=C(C=CC(=C1)OC2=C(C=C(C=C2)Cl)Cl)[N+](=O)[O-],-16.3,10.1016/j.fluid.2010.09.043
-bromacil,"5-bromo-3-butan-2-yl-6-methyl-1H-pyrimidine-2,4-dione",hexadecane,CCC(C)N1C(=O)C(=C(NC1=O)C)Br,-11.3,10.1016/j.fluid.2010.09.043
-chlorobenzilate,"ethyl 2,2-bis(4-chlorophenyl)-2-hydroxyacetate",hexadecane,CCOC(=O)C(C1=CC=C(C=C1)Cl)(C2=CC=C(C=C2)Cl)O,-15.2,10.1016/j.fluid.2010.09.043
-chlorpyrifos,"diethoxy-sulfanylidene-(3,5,6-trichloropyridin-2-yl)oxy-lambda5-phosphane",hexadecane,CCOP(=S)(OCC)OC1=NC(Cl)=C(Cl)C=C1Cl,-12,10.1016/j.fluid.2010.09.043
-clofentezine,"3,6-bis(2-chlorophenyl)-1,2,4,5-tetrazine",hexadecane,C1=CC=C(C(=C1)C2=NN=C(N=N2)C3=CC=CC=C3Cl)Cl,-13,10.1016/j.fluid.2010.09.043
-clothianidin,"1-[(2-chloro-1,3-thiazol-5-yl)methyl]-3-methyl-2-nitroguanidine",hexadecane,CNC(=N[N+](=O)[O-])NCC1=CN=C(S1)Cl,-13.8,10.1016/j.fluid.2010.09.043
-cyanazine,"2-[[4-chloro-6-(ethylamino)-1,3,5-triazin-2-yl]amino]-2-methylpropanenitrile",hexadecane,CCNC1=NC(=NC(=N1)Cl)NC(C)(C)C#N,-11.2,10.1016/j.fluid.2010.09.043
-cyproconazole,"2-(4-Chlorophenyl)-3-cyclopropyl-1-(1H-1,2,4-triazol-1-yl)-2-butanol",hexadecane,CC(C1CC1)C(Cn2cncn2)(c3ccc(cc3)Cl)O,-13.7,10.1016/j.fluid.2010.09.043
-diazinon,diethoxy-(6-methyl-2-propan-2-ylpyrimidin-4-yl)oxy-sulfanylidene-lambda5-phosphane,hexadecane,CCOP(=S)(OCC)OC1=NC(=NC(C)=C1)C(C)C,-11.5,10.1016/j.fluid.2010.09.043
-dichlorofluanid,N-[dichloro(fluoro)methyl]sulfanyl-N-(dimethylsulfamoyl)aniline,hexadecane,CN(C)S(=O)(=O)N(C1=CC=CC=C1)SC(F)(Cl)Cl,-10.03,10.1016/j.fluid.2010.09.043
-diflufenican,"N-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]pyridine-3-carboxamide",hexadecane,C1=CC(=CC(=C1)OC2=C(C=CC=N2)C(=O)NC3=C(C=C(C=C3)F)F)C(F)(F)F,-16.4,10.1016/j.fluid.2010.09.043
-dimethenamid,"2-chloro-N-(2,4-dimethylthiophen-3-yl)-N-(1-methoxypropan-2-yl)acetamide",hexadecane,CC1=CSC(=C1N(C(C)COC)C(=O)CCl)C,-13.4,10.1016/j.fluid.2010.09.043
-endrin,"(1R,2R,7S,8S,9S,11R)-3,4,5,6,13,13-Hexachloro-10-oxapentacyclo[6.3.1.1~3,6~.0~2,7~.0~9,11~]tridec-4-ene",hexadecane,C1[C@@H]2[C@@H]3[C@H]([C@H]1[C@H]4[C@@H]2O4)[C@@]5(C(=C([C@]3(C5(Cl)Cl)Cl)Cl)Cl)Cl,-17.6,10.1016/j.fluid.2010.09.043
-estradiol,"(8R,9S,13S,14S,17S)-13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta[a]phenanthrene-3,17-diol",hexadecane,C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@@H]2O)CCC4=C3C=CC(=C4)O,-19.8,10.1016/j.fluid.2010.09.043
-fbet,"3,3,4,4,5,5,6,6,6-nonafluorohexan-1-ol",hexadecane,C(CO)C(C(C(C(F)(F)F)(F)F)(F)F)(F)F,1.91,10.1016/j.fluid.2010.09.043
-fluazinam,"3-Chloro-N-[3-chloro-2,6-dinitro-4-(trifluoromethyl)phenyl]-5-(trifluoromethyl)-2-pyridinamine",hexadecane,c1c(cnc(c1Cl)Nc2c(cc(c(c2[N+](=O)[O-])Cl)C(F)(F)F)[N+](=O)[O-])C(F)(F)F,-12,10.1016/j.fluid.2010.09.043
-flumioxazin,"2-[7-Fluoro-3-oxo-4-(2-propyn-1-yl)-3,4-dihydro-2H-1,4-benzoxazin-6-yl]-4,5,6,7-tetrahydro-1H-isoindole-1,3(2H)-dione",hexadecane,C#CCN1c2cc(c(cc2OCC1=O)F)N3C(=O)C4=C(C3=O)CCCC4,-13.6,10.1016/j.fluid.2010.09.043
-hydrocortisone,"(8S,9S,10R,11S,13S,14S,17R)-11,17-dihydroxy-17-(2-hydroxyacetyl)-10,13-dimethyl-2,6,7,8,9,11,12,14,15,16-decahydro-1H-cyclopenta[a]phenanthren-3-one",hexadecane,C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C)O,-24.6,10.1016/j.fluid.2010.09.043
-pymetrozine,"6-methyl-4-[(E)-pyridin-3-ylmethylideneamino]-2,5-dihydro-1,2,4-triazin-3-one",hexadecane,CC1=NNC(=O)N(C1)/N=C/C2=CN=CC=C2,-10.2,10.1016/j.fluid.2010.09.043
-sulfentrazone,"N-[2,4-dichloro-5-[4-(difluoromethyl)-3-methyl-5-oxo-1,2,4-triazol-1-yl]phenyl]methanesulfonamide",hexadecane,CC1=NN(C(=O)N1C(F)F)C2=C(C=C(C(=C2)NS(=O)(=O)C)Cl)Cl,-20.6,10.1016/j.fluid.2010.09.043
-tepp,diethoxyphosphoryl diethyl phosphate,hexadecane,CCOP(=O)(OCC)OP(=O)(OCC)OCC,-15.4,10.1016/j.fluid.2010.09.043
-thiazopyr,"methyl 2-(difluoromethyl)-5-(4,5-dihydro-1,3-thiazol-2-yl)-4-(2-methylpropyl)-6-(trifluoromethyl)pyridine-3-carboxylate",hexadecane,CC(C)CC1=C(C(=NC(=C1C(=O)OC)C(F)F)C(F)(F)F)C2=NCCS2,-19.1,10.1016/j.fluid.2010.09.043
-zearalenone,"(4S,12E)-16,18-dihydroxy-4-methyl-3-oxabicyclo[12.4.0]octadeca-1(14),12,15,17-tetraene-2,8-dione",hexadecane,C[C@H]1CCCC(=O)CCC/C=C/C2=C(C(=CC(=C2)O)O)C(=O)O1,-18.7,10.1016/j.fluid.2010.09.043
+alachlor,"2-chloro-N-(2,6-diethylphenyl)-N-(methoxymethyl)acetamide",hexadecane,CCC1=C(C(=CC=C1)CC)N(COC)C(=O)CCl,-11.5,10.1016/j.fluid.2010.09.043
+bifenox,"methyl 5-(2,4-dichlorophenoxy)-2-nitrobenzoate",hexadecane,COC(=O)C1=C(C=CC(=C1)OC2=C(C=C(C=C2)Cl)Cl)[N+](=O)[O-],-14.1,10.1016/j.fluid.2010.09.043
+bromacil,"5-bromo-3-butan-2-yl-6-methyl-1H-pyrimidine-2,4-dione",hexadecane,CCC(C)N1C(=O)C(=C(NC1=O)C)Br,-11.2,10.1016/j.fluid.2010.09.043
+chlorobenzilate,"ethyl 2,2-bis(4-chlorophenyl)-2-hydroxyacetate",hexadecane,CCOC(=O)C(C1=CC=C(C=C1)Cl)(C2=CC=C(C=C2)Cl)O,-13.3,10.1016/j.fluid.2010.09.043
+chlorpyrifos,"diethoxy-sulfanylidene-(3,5,6-trichloropyridin-2-yl)oxy-lambda5-phosphane",hexadecane,CCOP(=S)(OCC)OC1=NC(Cl)=C(Cl)C=C1Cl,-11.6,10.1016/j.fluid.2010.09.043
+clofentezine,"3,6-bis(2-chlorophenyl)-1,2,4,5-tetrazine",hexadecane,C1=CC=C(C(=C1)C2=NN=C(N=N2)C3=CC=CC=C3Cl)Cl,-15.8,10.1016/j.fluid.2010.09.043
+clothianidin,"1-[(2-chloro-1,3-thiazol-5-yl)methyl]-3-methyl-2-nitroguanidine",hexadecane,CNC(=N[N+](=O)[O-])NCC1=CN=C(S1)Cl,-13,10.1016/j.fluid.2010.09.043
+cyanazine,"2-[[4-chloro-6-(ethylamino)-1,3,5-triazin-2-yl]amino]-2-methylpropanenitrile",hexadecane,CCNC1=NC(=NC(=N1)Cl)NC(C)(C)C#N,-11.3,10.1016/j.fluid.2010.09.043
+cyproconazole,"2-(4-Chlorophenyl)-3-cyclopropyl-1-(1H-1,2,4-triazol-1-yl)-2-butanol",hexadecane,CC(C1CC1)C(Cn2cncn2)(c3ccc(cc3)Cl)O,-13,10.1016/j.fluid.2010.09.043
+diazinon,diethoxy-(6-methyl-2-propan-2-ylpyrimidin-4-yl)oxy-sulfanylidene-lambda5-phosphane,hexadecane,CCOP(=S)(OCC)OC1=NC(=NC(C)=C1)C(C)C,-10.9,10.1016/j.fluid.2010.09.043
+dichlorofluanid,N-[dichloro(fluoro)methyl]sulfanyl-N-(dimethylsulfamoyl)aniline,hexadecane,CN(C)S(=O)(=O)N(C1=CC=CC=C1)SC(F)(Cl)Cl,-11.4,10.1016/j.fluid.2010.09.043
+diflufenican,"N-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]pyridine-3-carboxamide",hexadecane,C1=CC(=CC(=C1)OC2=C(C=CC=N2)C(=O)NC3=C(C=C(C=C3)F)F)C(F)(F)F,-13.8,10.1016/j.fluid.2010.09.043
+dimethenamid,"2-chloro-N-(2,4-dimethylthiophen-3-yl)-N-(1-methoxypropan-2-yl)acetamide",hexadecane,CC1=CSC(=C1N(C(C)COC)C(=O)CCl)C,-11.2,10.1016/j.fluid.2010.09.043
+endrin,"(1R,2R,7S,8S,9S,11R)-3,4,5,6,13,13-Hexachloro-10-oxapentacyclo[6.3.1.1~3,6~.0~2,7~.0~9,11~]tridec-4-ene",hexadecane,C1[C@@H]2[C@@H]3[C@H]([C@H]1[C@H]4[C@@H]2O4)[C@@]5(C(=C([C@]3(C5(Cl)Cl)Cl)Cl)Cl)Cl,-13,10.1016/j.fluid.2010.09.043
+estradiol,"(8R,9S,13S,14S,17S)-13-methyl-6,7,8,9,11,12,14,15,16,17-decahydrocyclopenta[a]phenanthrene-3,17-diol",hexadecane,C[C@]12CC[C@H]3[C@H]([C@@H]1CC[C@@H]2O)CCC4=C3C=CC(=C4)O,-15.2,10.1016/j.fluid.2010.09.043
+fbet,"3,3,4,4,5,5,6,6,6-nonafluorohexan-1-ol",hexadecane,C(CO)C(C(C(C(F)(F)F)(F)F)(F)F)(F)F,-3.4,10.1016/j.fluid.2010.09.043
+fluazinam,"3-Chloro-N-[3-chloro-2,6-dinitro-4-(trifluoromethyl)phenyl]-5-(trifluoromethyl)-2-pyridinamine",hexadecane,c1c(cnc(c1Cl)Nc2c(cc(c(c2[N+](=O)[O-])Cl)C(F)(F)F)[N+](=O)[O-])C(F)(F)F,-13.7,10.1016/j.fluid.2010.09.043
+flumioxazin,"2-[7-Fluoro-3-oxo-4-(2-propyn-1-yl)-3,4-dihydro-2H-1,4-benzoxazin-6-yl]-4,5,6,7-tetrahydro-1H-isoindole-1,3(2H)-dione",hexadecane,C#CCN1c2cc(c(cc2OCC1=O)F)N3C(=O)C4=C(C3=O)CCCC4,-16.4,10.1016/j.fluid.2010.09.043
+hydrocortisone,"(8S,9S,10R,11S,13S,14S,17R)-11,17-dihydroxy-17-(2-hydroxyacetyl)-10,13-dimethyl-2,6,7,8,9,11,12,14,15,16-decahydro-1H-cyclopenta[a]phenanthren-3-one",hexadecane,C[C@]12CCC(=O)C=C1CC[C@@H]3[C@@H]2[C@H](C[C@]4([C@H]3CC[C@@]4(C(=O)CO)O)C)O,-18.7,10.1016/j.fluid.2010.09.043
+pymetrozine,"6-methyl-4-[(E)-pyridin-3-ylmethylideneamino]-2,5-dihydro-1,2,4-triazin-3-one",hexadecane,CC1=NNC(=O)N(C1)/N=C/C2=CN=CC=C2,-12,10.1016/j.fluid.2010.09.043
+sulfentrazone,"N-[2,4-dichloro-5-[4-(difluoromethyl)-3-methyl-5-oxo-1,2,4-triazol-1-yl]phenyl]methanesulfonamide",hexadecane,CC1=NN(C(=O)N1C(F)F)C2=C(C=C(C(=C2)NS(=O)(=O)C)Cl)Cl,-13.6,10.1016/j.fluid.2010.09.043
+tepp,diethoxyphosphoryl diethyl phosphate,hexadecane,CCOP(=O)(OCC)OP(=O)(OCC)OCC,-9.1,10.1016/j.fluid.2010.09.043
+thiazopyr,"methyl 2-(difluoromethyl)-5-(4,5-dihydro-1,3-thiazol-2-yl)-4-(2-methylpropyl)-6-(trifluoromethyl)pyridine-3-carboxylate",hexadecane,CC(C)CC1=C(C(=NC(=C1C(=O)OC)C(F)F)C(F)(F)F)C2=NCCS2,-11.9,10.1016/j.fluid.2010.09.043
+zearalenone,"(4S,12E)-16,18-dihydroxy-4-methyl-3-oxabicyclo[12.4.0]octadeca-1(14),12,15,17-tetraene-2,8-dione",hexadecane,C[C@H]1CCCC(=O)CCC/C=C/C2=C(C(=CC(=C2)O)O)C(=O)O1,-16.3,10.1016/j.fluid.2010.09.043
 bromoxynil,"3,5-dibromo-4-hydroxybenzonitrile",hexane,C1=C(C=C(C(=C1Br)O)Br)C#N,-9.67,10.1021/ci100299m
 anycymidol,cyclopropyl-(4-methoxyphenyl)-pyrimidin-5-ylmethanol,water,COC1=CC=C(C=C1)C(C2CC2)(C3=CN=CN=C3)O,-12.37,10.1021/es8005783
 diallylsulfide,3-prop-2-enylsulfanylprop-1-ene,water,C=CCSCC=C,4.86,10.1021/es8005783
